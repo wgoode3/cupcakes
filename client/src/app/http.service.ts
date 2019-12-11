@@ -21,4 +21,8 @@ export class HttpService {
     return this._httpClient.post("/cakes", newCake);
   }
 
+  review(_id: string, review: any): Observable<any> {
+    return this._httpClient.post(`/review/${_id}`, review);
+  }
+
 }

@@ -17,6 +17,14 @@ class CakeController {
             .catch(err => res.json(err));
     }
 
+    review(req, res) {
+        let _id = req.params._id;
+        let review = new Review(req.body);
+        Cake.findByIdAndUpdate({_id}, {$push: {reviews: review}}, {runValidators: true})
+            .then(() => res.json({'msg': 'better have been 5 stars!'}))
+            .catch(err => res.json(err));
+    }
+
 }
 
 module.exports = new CakeController();

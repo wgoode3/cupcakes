@@ -1,5 +1,7 @@
 <h1>Cakes are tasty!</h1>
 
+<!-- {{ cakes | json }} -->
+
 <fieldset>
   <legend>It's a piece of cake to bake a pretty cake!</legend>
   <form (submit)="getBaked()">
@@ -26,12 +28,18 @@
       <h1>{{ cake.name }}</h1>
       <h3>By: {{ cake.baker }}</h3>
       <img src="{{ cake.image }}" alt="it's a cake" width="250px" />
+      <p>Some reviews:</p>
+      <p *ngFor="let review of cake.reviews">
+        <strong>{{ review.name }} says:</strong>
+        {{ review.comment }}
+        <em>({{ review.rating }} star(s))</em>
+      </p>
     </div>
     <div style="display: inline-block; width: 400px; vertical-align: top;">
       <br><br>
       <button (click)="toggleReviewForm(i)">Leave a Review!</button>
       <br><br>
-      <form *ngIf="cake.isReviewing" (submit)="review(cake._id)">
+      <form *ngIf="cake.isReviewing" (submit)="leaveReview(cake._id)">
         <div>
           <label>Reviewer Name:</label>
           <input type="text" name="review.name" [(ngModel)]="review.name" />

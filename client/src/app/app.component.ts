@@ -54,4 +54,16 @@ export class AppComponent implements OnInit{
     this.cakes[i].isReviewing = true;
   }
 
+  leaveReview(_id) {
+    const likeComment: Observable<any> = this._http.review(_id, this.review);
+    likeComment.subscribe( res => {
+      console.log(res);
+      this.review = {};
+      this.cakes.forEach(c => {
+        c.isReviewing = false
+      });
+      this.ngOnInit();
+    });
+  }
+
 }
